@@ -3,7 +3,7 @@
 //#endregion
 
 const classList = (x, y, z) => { if (Array.isArray(z)) x.classList[y](...z); else x.classList[y](z) },
-  checker = (x, y) => target instanceof HTMLElement && "object" === typeof style && style !== null;
+  checker = (x, y) => x instanceof HTMLElement && "object" === typeof y && y !== null;
 /**
  * @param {targetElements} target
  * @param {string | string[]} css
