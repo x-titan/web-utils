@@ -11,7 +11,7 @@ export function search(source, primary = $d) { return primary.querySelector(sour
 /**
  * @param {string} source
  */
-search.id = (source) => primary.getElementById(source)
+search.id = source => $d.getElementById(source)
 /**
  * @param {string} source
  * @param {targetElements} primary
