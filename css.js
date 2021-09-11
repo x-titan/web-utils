@@ -1,26 +1,26 @@
 //#region Types
-/** @typedef {HTMLElement | HTMLDivElement | Element} targetElements */
+/** @typedef {HTMLElement | HTMLDivElement | Element} targetElement */
 //#endregion
 
 const classList = (x, y, z) => { if (Array.isArray(z)) x.classList[y](...z); else x.classList[y](z) },
   checker = (x, y) => x instanceof HTMLElement && "object" === typeof y && y !== null;
 /**
- * @param {targetElements} target
+ * @param {targetElement} target
  * @param {string | string[]} css
  */
 export function add(target, css) { classList(target, "add", css) }
 /**
- * @param {targetElements} target
+ * @param {targetElement} target
  * @param {string | string[]} css
  */
 export function remove(target, css) { classList(target, "remove", css) }
 /**
- * @param {targetElements} target
+ * @param {targetElement} target
  * @param {string} css
  */
 export function contains(target, css) { return target.classList.contains(css) }
 /**
- * @param {targetElements} target
+ * @param {targetElement} target
  * @param {string} css
  * @param {boolean} [force]
  */
