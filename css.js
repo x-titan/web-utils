@@ -2,18 +2,18 @@
 /** @typedef {HTMLElement | HTMLDivElement | Element} targetElement */
 //#endregion
 
-const classList = (x, y, z) => { if (Array.isArray(z)) x.classList[y](...z); else x.classList[y](z) },
+const _ = (x, y, z) => { if (Array.isArray(z)) x.classList[y](...z); else x.classList[y](z) },
   checker = (x, y) => x instanceof HTMLElement && "object" === typeof y && y !== null;
 /**
  * @param {targetElement} target
  * @param {string | string[]} css
  */
-export function add(target, css) { classList(target, "add", css) }
+export function add(target, css) { _(target, "add", css) }
 /**
  * @param {targetElement} target
  * @param {string | string[]} css
  */
-export function remove(target, css) { classList(target, "remove", css) }
+export function remove(target, css) { _(target, "remove", css) }
 /**
  * @param {targetElement} target
  * @param {string} css
@@ -43,8 +43,8 @@ styler.set = (target, style) => {
     if (Object.hasOwnProperty.call(style, k)) target.style.setProperty(k, style[k])
 }
 const css = Object.freeze({
-  add(target, css) { classList(target, "add", css) },
-  remove(target, css) { classList(target, "remove", css) },
+  add(target, css) { _(target, "add", css) },
+  remove(target, css) { _(target, "remove", css) },
   contains(target, css) { return target.classList.contains(css) },
   toggle(target, css, force) { return target.classList.toggle(css, force) }
 })
