@@ -4,9 +4,9 @@
  * @author Telmanov Aset
  * email: telmanov2002.at@gmail.com
  */
-import { add, contains, remove, styler, toggle } from "./css.js"
+import { add, contains, css, remove, styler, toggle } from "./css.js"
 import device from "./device.js"
 import { scrollTo, search } from "./document.js"
 import "./polifill.js"
 
-export { add, contains, remove, styler, toggle, device, scrollTo, search }
+export { add, contains, css, remove, styler, toggle, device, scrollTo, search }

@@ -42,3 +42,10 @@ styler.set = (target, style) => {
   if (checker(target, style)) for (const k in style)
     if (Object.hasOwnProperty.call(style, k)) target.style.setProperty(k, style[k])
 }
+const css = Object.freeze({
+  add(target, css) { classList(target, "add", css) },
+  remove(target, css) { classList(target, "remove", css) },
+  contains(target, css) { return target.classList.contains(css) },
+  toggle(target, css, force) { return target.classList.toggle(css, force) }
+})
+export { css }
