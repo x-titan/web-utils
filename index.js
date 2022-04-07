@@ -4,9 +4,12 @@
  * @author Telmanov Aset
  * email: telmanov2002.at@gmail.com
  */
-import { add, contains, css, remove, styler, toggle } from "./css.js"
+export * from "./css.js"
 import device from "./device.js"
-import { scrollTo, search } from "./document.js"
+export * from "./document.js"
 import "./polifill.js"
 
-export { add, contains, css, remove, styler, toggle, device, scrollTo, search }
+export { device }
+console.log("This project uses web utilities from Titan\n" +
+  "For more information in the https://x-titan.github.io/web-utils\n" +
+  "Author X-Titan. Email address telmanov2002.at@gmail.com")
