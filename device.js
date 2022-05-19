@@ -1,6 +1,6 @@
-const n = navigator || window.navigator,
-  s = screen || window.screen,
-  a = () => { return n.userAgent || n.vendor || window.opera }
+const n = navigator || window.navigator
+const s = screen || window.screen
+const a = () => (n.userAgent || n.vendor || window.opera)
 
 const device = Object.freeze({
   /** @return {string} */
@@ -10,19 +10,31 @@ const device = Object.freeze({
   isDesktop() { return !device.isMobileAndTable() },
   isIPhone() { return /iP(ad|hone|od)/.test(a()) },
   isTable() { return /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(a()) },
+
   type() {
     if (device.isDesktop()) return "desktop"
     if (device.isMobile()) return "mobile"
     if (device.isTable()) return "table"
     return "undefined"
   },
+
   screen() {
     const { width, height } = s
+    
     return {
       width, height, innerWidth, innerHeight,
-      ratio: (width > height) ? width / height : height / width,
-      innerRatio: (innerWidth > innerHeight) ? innerWidth / innerHeight : innerHeight / innerWidth
+      ratio: (
+        (width > height)
+          ? width / height
+          : height / width
+      ),
+      innerRatio: (
+        (innerWidth > innerHeight)
+          ? innerWidth / innerHeight
+          : innerHeight / innerWidth
+      ),
     }
-  }
+  },
 })
+
 export default device

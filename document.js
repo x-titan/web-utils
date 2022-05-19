@@ -3,53 +3,82 @@
 //#endregion
 
 const $d = document
+
 /**
  * @param {string} source
  * @param {targetElement} primary
  */
-export function search(source, primary = $d) { return primary.querySelector(source) }
-/**
- * @param {string} source
- */
-search.id = source => $d.getElementById(source)
+export function search(source, primary = $d) {
+  return primary.querySelector(source)
+}
+
 /**
  * @param {string} source
  * @param {targetElement} primary
  */
-search.all = (source, primary = $d) => primary.querySelectorAll(source)
-search.newElement = $d.createElement; (fn => search.newElement = fn.bind($d))($d.createElement);
+search.id = (source, primary = $d) => (
+  primary.getElementById(source)
+)
+
+/**
+ * @param {string} source
+ * @param {targetElement} primary
+ */
+search.all = (source, primary = $d) => (
+  primary.querySelectorAll(source)
+)
+
+/**
+ * @param {'div'|'span'|'canvas'|'p'|'a'|string} tagName
+ * @param {ElementCreationOptions} options
+ */
+search.new = search.newElement = (tagName, options) => (
+  $d.createElement(tagName, options)
+)
+
 /** @param {targetElement} target */
-export function scrollTo(target) { target.scrollIntoView({ behavior: "smooth" }) }
+export function scrollTo(target) {
+  target.scrollIntoView({ behavior: 'smooth' })
+  return target
+}
+
 /**
  * @param {string|Image|HTMLImageElement} source
  * @param {(base64: string) => void} [callback]
  * @return {Promise<string>}
  */
-export function getBase64(source, callback, outputformat) {
-  if (typeof outputformat !== "string")
-    outputformat = "image/png"
+export function getBase64(source, callback, outputFormat) {
+  if (typeof outputFormat !== 'string') {
+    outputFormat = 'image/png'
+  }
   return new Promise((res, rej) => {
     const image = new Image()
-    image.crossOrigin = "Anonymous"
+
+    image.crossOrigin = 'Anonymous'
+    image.onerror = e => rej(e)
     image.onload = () => {
       try {
-        const canvas = document.createElement("canvas")
-        const ctx = canvas.getContext("2d")
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+
         canvas.height = image.naturalHeight
         canvas.width = image.naturalWidth
         ctx.drawImage(image, 0, 0)
-        res(canvas.toDataURL(outputformat))
+        res(canvas.toDataURL(outputFormat))
       } catch (error) { rej(error) }
     }
-    image.onerror = e => rej(e)
-    if (typeof source === "string")
+
+    if (typeof source === 'string') {
       image.src = source
-    else if (source instanceof Image)
+    } else if (source instanceof Image) {
       image.src = source.src
-    else rej(new TypeError("Not supported source param"))
+    } else {
+      rej(new TypeError('Not supported source param'))
+    }
   }).then((base) => {
-    if (typeof callback === "function")
+    if (typeof callback === 'function') {
       callback(base, source)
+    }
     return base
   })
 }
