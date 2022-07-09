@@ -1,18 +1,20 @@
+import { validHTML } from "./internal.js"
+
 //#region Types
 /** @typedef {HTMLElement | HTMLDivElement | Element} targetElement */
 //#endregion
 
-const _ = (x, y, z) => (
-  Array.isArray(z)
-    ? x.classList[y](...z)
-    : x.classList[y](z)
-)
-
-const checker = (x, y) => (
-  x instanceof HTMLElement
-  && "object" === typeof y
-  && y !== null
-)
+const _ = (x, y, z) => {
+  validHTML(x)
+  const _x = x.classList[y]
+  Array.isArray(z) ? _x(...z) : _x(z)
+}
+const validObj = (x) => {
+  if ("object" === typeof x && x !== null) {
+    return true
+  }
+  throw new TypeError("Invalid Argument. Required a Object")
+}
 
 /**
  * @param {targetElement} target
@@ -31,6 +33,7 @@ export function remove(target, css) { _(target, "remove", css) }
  * @param {string} css
  */
 export function contains(target, css) {
+  validHTML(target)
   return target.classList.contains(css)
 }
 
@@ -40,6 +43,7 @@ export function contains(target, css) {
  * @param {boolean} [force]
  */
 export function toggle(target, css, force) {
+  validHTML(target)
   return target.classList.toggle(css, force)
 }
 
@@ -56,7 +60,6 @@ export function styler(target, style) {
       target.style[k] = style[k]
     }
   }
-
   return target
 }
 
@@ -65,13 +68,15 @@ export function styler(target, style) {
  * @param {CSSStyleDeclaration} css
  */
 styler.set = (target, style) => {
-  if (checker(target, style)) {
-    for (const k in style) {
-      if (Object.hasOwnProperty.call(style, k)) {
-        target.style.setProperty(k, style[k])
-      }
+  validHTML(target)
+  validObj(style)
+  const ts = target.style
+  for (const k in style) {
+    if (Object.hasOwnProperty.call(style, k)) {
+      ts.setProperty(k, style[k])
     }
   }
+  return target
 }
 
 const css = Object.freeze({
@@ -80,4 +85,5 @@ const css = Object.freeze({
   contains,
   toggle,
 })
+
 export { css }
