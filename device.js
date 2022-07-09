@@ -20,7 +20,7 @@ const device = Object.freeze({
 
   screen() {
     const { width, height } = s
-    
+
     return {
       width, height, innerWidth, innerHeight,
       ratio: (
@@ -33,6 +33,11 @@ const device = Object.freeze({
           ? innerWidth / innerHeight
           : innerHeight / innerWidth
       ),
+      orientation: (
+        (innerWidth > innerHeight)
+          ? "horizontal"
+          : "vertical"
+      )
     }
   },
 })
