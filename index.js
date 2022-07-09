@@ -5,8 +5,8 @@
  * email: telmanov2002.at@gmail.com
  */
 import device from "./device.js"
-import "./polifill.js"
 
+export { isHTML, validHTML } from "./internal.js"
 export * from "./css.js"
 export * from "./document.js"
 export { device }

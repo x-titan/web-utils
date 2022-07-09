@@ -1,3 +1,5 @@
+import { validHTML } from "./internal.js"
+
 //#region Types
 /** @typedef {HTMLElement | HTMLDivElement | Element} targetElement */
 //#endregion
@@ -9,6 +11,7 @@ const $d = document
  * @param {targetElement} primary
  */
 export function search(source, primary = $d) {
+  validHTML(primary)
   return primary.querySelector(source)
 }
 
@@ -17,7 +20,7 @@ export function search(source, primary = $d) {
  * @param {targetElement} primary
  */
 search.id = (source, primary = $d) => (
-  primary.getElementById(source)
+  primary.getElementById(validHTML(source))
 )
 
 /**
@@ -25,7 +28,7 @@ search.id = (source, primary = $d) => (
  * @param {targetElement} primary
  */
 search.all = (source, primary = $d) => (
-  primary.querySelectorAll(source)
+  primary.querySelectorAll(validHTML(source))
 )
 
 /**
@@ -38,6 +41,7 @@ search.new = search.newElement = (tagName, options) => (
 
 /** @param {targetElement} target */
 export function scrollTo(target) {
+  validHTML(target)
   target.scrollIntoView({ behavior: 'smooth' })
   return target
 }
