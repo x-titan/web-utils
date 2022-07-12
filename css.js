@@ -5,9 +5,10 @@ import { validHTML } from "./internal.js"
 //#endregion
 
 const _ = (x, y, z) => {
-  validHTML(x)
-  const _x = x.classList[y]
-  Array.isArray(z) ? _x(...z) : _x(z)
+  validHTML(x);
+  (Array.isArray(z)
+    ? x.classList[y].call(...z)
+    : x.classList[y](z));
 }
 const validObj = (x) => {
   if ("object" === typeof x && x !== null) {
