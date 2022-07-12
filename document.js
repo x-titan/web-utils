@@ -20,7 +20,7 @@ export function search(source, primary = $d) {
  * @param {targetElement} primary
  */
 search.id = (source, primary = $d) => (
-  primary.getElementById(validHTML(source))
+  validHTML(primary).getElementById(source)
 )
 
 /**
@@ -28,7 +28,7 @@ search.id = (source, primary = $d) => (
  * @param {targetElement} primary
  */
 search.all = (source, primary = $d) => (
-  primary.querySelectorAll(validHTML(source))
+  validHTML(primary).querySelectorAll(source)
 )
 
 /**

@@ -4,6 +4,10 @@ export function isHTML(value) {
   return (value instanceof HTMLElement || value === d)
 }
 
+/**
+ * @param {HTMLElement} value
+ * @return {value}
+ */
 export function validHTML(value) {
   if (isHTML(value)) {
     return value
