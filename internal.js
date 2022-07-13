@@ -14,22 +14,22 @@ export function validHTML(value) {
   }
   throw new TypeError("Bad argument. Required a HTMLElement")
 }
+if (typeof HTMLElement.prototype.getElementsById !== "function") {
+  Object.defineProperty(HTMLElement.prototype, "getElementById", {
+    /** 
+     * @param {string} id
+     * @return {HTMLElement}
+     */
+    value: function (id) {
+      if (!isHTML(this)) {
+        throw new TypeError("`this` is not HTMLElement")
+      }
 
-Object.defineProperty(HTMLElement.prototype, "getElementById", {
-  /** 
-   * @param {string} id
-   * @return {HTMLElement}
-   */
-  value: function (id) {
-    if (!isHTML(this)) {
-      throw new TypeError("`this` is not HTMLElement")
+      if ("string" !== typeof id || id === "") {
+        throw new Error("Bad argument. Unexpected `id`. Required a string")
+      }
+
+      return this.querySelector("#" + id)
     }
-
-    if ("string" !== typeof id || id === "") {
-      throw new Error("Bad argument. Unexpected `id`. Required a string")
-    }
-
-    return this.querySelector("#" + id)
-  }
-})
-
+  })
+}

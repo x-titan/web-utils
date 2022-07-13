@@ -34,8 +34,7 @@ export function remove(target, css) { _(target, "remove", css) }
  * @param {string} css
  */
 export function contains(target, css) {
-  validHTML(target)
-  return target.classList.contains(css)
+  return validHTML(target).classList.contains(css)
 }
 
 /**
@@ -44,8 +43,7 @@ export function contains(target, css) {
  * @param {boolean} [force]
  */
 export function toggle(target, css, force) {
-  validHTML(target)
-  return target.classList.toggle(css, force)
+  return validHTML(target).classList.toggle(css, force)
 }
 
 /**
@@ -53,9 +51,8 @@ export function toggle(target, css, force) {
  * @param {CSSStyleDeclaration} css
  */
 export function styler(target, style) {
-  if (!checker(target, style)) {
-    throw new TypeError("Invalid arguments.")
-  }
+  validHTML(target)
+  validObj(style)
   for (const k in style) {
     if (Object.hasOwnProperty.call(style, k)) {
       target.style[k] = style[k]

@@ -11,8 +11,7 @@ const $d = document
  * @param {targetElement} primary
  */
 export function search(source, primary = $d) {
-  validHTML(primary)
-  return primary.querySelector(source)
+  return validHTML(primary).querySelector(source)
 }
 
 /**
@@ -41,8 +40,7 @@ search.new = search.newElement = (tagName, options) => (
 
 /** @param {targetElement} target */
 export function scrollTo(target) {
-  validHTML(target)
-  target.scrollIntoView({ behavior: 'smooth' })
+  validHTML(target).scrollIntoView({ behavior: 'smooth' })
   return target
 }
 
