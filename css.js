@@ -9,6 +9,7 @@ const _ = (x, y, z) => {
   (Array.isArray(z)
     ? x.classList[y].call(...z)
     : x.classList[y](z));
+  return x
 }
 const validObj = (x) => {
   if ("object" === typeof x && x !== null) {
@@ -19,36 +20,36 @@ const validObj = (x) => {
 
 /**
  * @param {targetElement} target
- * @param {string | string[]} css
+ * @param {string | string[]} style
  */
-export function add(target, css) { _(target, "add", css) }
+export function add(target, style) { return _(target, "add", style) }
 
 /**
  * @param {targetElement} target
- * @param {string | string[]} css
+ * @param {string | string[]} style
  */
-export function remove(target, css) { _(target, "remove", css) }
+export function remove(target, style) { return _(target, "remove", style) }
 
 /**
  * @param {targetElement} target
- * @param {string} css
+ * @param {string} style
  */
-export function contains(target, css) {
-  return validHTML(target).classList.contains(css)
+export function contains(target, style) {
+  return validHTML(target).classList.contains(style)
 }
 
 /**
  * @param {targetElement} target
- * @param {string} css
+ * @param {string} style
  * @param {boolean} [force]
  */
-export function toggle(target, css, force) {
-  return validHTML(target).classList.toggle(css, force)
+export function toggle(target, style, force) {
+  return validHTML(target).classList.toggle(style, force)
 }
 
 /**
  * @param {HTMLElement | HTMLDivElement} target
- * @param {CSSStyleDeclaration} css
+ * @param {CSSStyleDeclaration} style
  */
 export function styler(target, style) {
   validHTML(target)
@@ -63,7 +64,7 @@ export function styler(target, style) {
 
 /**
  * @param {HTMLElement | HTMLDivElement} target
- * @param {CSSStyleDeclaration} css
+ * @param {CSSStyleDeclaration} style
  */
 styler.set = (target, style) => {
   validHTML(target)
@@ -82,6 +83,14 @@ const css = Object.freeze({
   remove,
   contains,
   toggle,
+})
+
+Object.assign(HTMLElement.prototype, {
+  add(style) { return _(this, "add", style) },
+  remove(style) { return _(this, "remove", style) },
+  contains(style) { return contains(this, style) },
+  toggle(style, force) { return toggle(this, style, force) },
+  css(style) { styler(this, style) }
 })
 
 export { css }
