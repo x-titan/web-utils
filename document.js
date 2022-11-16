@@ -1,4 +1,4 @@
-import { validHTML } from "./internal.js"
+import { validHTML } from "./include.js"
 
 //#region Types
 /** @typedef {HTMLElement | HTMLDivElement | Element} targetElement */

@@ -14,6 +14,7 @@ export function validHTML(value) {
   }
   throw new TypeError("Bad argument. Required a HTMLElement")
 }
+
 if (typeof HTMLElement.prototype.getElementsById !== "function") {
   Object.defineProperty(HTMLElement.prototype, "getElementById", {
     /** 
