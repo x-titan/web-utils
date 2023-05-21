@@ -18,11 +18,15 @@ attr.remove = function (element, attrName) {
   return element
 }
 
-attr.set = function (element, attrName, attrValue) {
+attr.add = attr.set = function (element, attrName, attrValue) {
   validHTML(element)
   if (attrName instanceof Attr) {
     element.setAttributeNode(attrName)
   } else {
+    if (typeof attrName !== "string") {
+      throw new TypeError("Second argument is not type a Attr or String")
+    }
+    if (typeof attrValue !== "string") attrValue = ""
     element.setAttribute(attrName, attrValue)
   }
   return element
