@@ -1,8 +1,9 @@
 {
   "name": "xtitan_web_utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/x-titan/web-utils.git"
